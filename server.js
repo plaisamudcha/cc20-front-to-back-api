@@ -16,8 +16,9 @@ pai.use('/api',userRouter)
 pai.use('/auth',authRouter)
 
 pai.use((err,req,res,next) => {
-  res.json({message: "server error"})
+  res.status(err.code || 500).json({message: err.message || "server error"})
 })
+
 
 pai.listen(PORT,()=>{
   console.log(`Server is running on http://localhost:${PORT}`)
